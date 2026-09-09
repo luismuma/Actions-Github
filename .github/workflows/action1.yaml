@@ -67,3 +67,22 @@ jobs:
           echo "Estoy dentro del runner de GitHub"
           pwd
           ls -la
+          
+  build_two:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Run a one-line script
+        run: echo "Hello, world!"
+
+      - name: Run a multi-line script
+        shell: bash
+        run: |
+          echo "Add other actions to build,"
+          echo "Aquí puedo ejecutar varios comandos"
+          echo "Estoy dentro del runner de GitHub"
+          pwd
+          ls -la

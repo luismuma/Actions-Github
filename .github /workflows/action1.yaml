@@ -71,14 +71,4 @@ jobs:
           echo "IP pública del runner:"
           curl -s https://api.ipify.org
           echo
-
-  job-3:
-    runs-on: self-hosted
-
-    steps:
-      - name: IP pública de mi ordenador
-        shell: bash
-        run: |
-          echo "IP pública de mi ordenador:"
-          curl -s https://api.ipify.org
-          echo
+          

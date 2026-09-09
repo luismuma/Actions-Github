@@ -1,1 +1,83 @@
+name: Mi workflow
+# Este evento ejecuta el workflow cuando hacemos push
+          # 1. pull_request
+          #Se ejecuta cuando se crea o modifica un Pull Request:
+          #on:
+          #  pull_request:
+          #    branches:
+          #      - main
+                      #2. workflow_dispatch
+                      #Permite ejecutarlo manualmente desde GitHub:
+                      #on:
+                      #  workflow_dispatch:
+                      #on:
+                      #  workflow_dispatch:
+                      #   inputs:
+                      #      environment:
+                      #        description: "Entorno"
+                      #        required: true
+                      #        type: choice
+                      #        options:
+                      #          - development
+                      #          - production
+                                                  #3. schedule
+                                                  #Ejecutarlo automáticamente mediante cron:
+                                                  #on:
+                                                  #  schedule:
+                                                  #    - cron: "0 8 * * 1"
+                                                  # Esto lo ejecuta cada lunes a las 08:00 UTC.
+                                                                                                      # 4. push con tags
+                                                                                                      # on:
+                                                                                                      #   push:
+                                                                                                      #     tags:
+                                                                                                      #       - "v*"
+                                                                                                      # Por ejemplo, se ejecutaría al crear:
+                                                                                                      # v1.0.0
+                                                                                                      # v2.3.1
+on:
+  push:
+    branches:
+      - main
 
+jobs:
+  job-1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mostrar mensaje
+        run: echo "Hola desde GitHub Actions"
+
+      - name: Ver directorio actual
+        run: pwd
+
+      - name: Listar archivos
+        run: ls -la
+
+      - name: Ejecutar varios comandos
+        shell: bash
+        run: |
+          echo "Primer comando"
+          echo "Segundo comando"
+          echo "Tercer comando"
+
+  job-2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: IP pública del runner de GitHub
+        shell: bash
+        run: |
+          echo "IP pública del runner:"
+          curl -s https://api.ipify.org
+          echo
+
+  job-3:
+    runs-on: self-hosted
+
+    steps:
+      - name: IP pública de mi ordenador
+        shell: bash
+        run: |
+          echo "IP pública de mi ordenador:"
+          curl -s https://api.ipify.org
+          echo

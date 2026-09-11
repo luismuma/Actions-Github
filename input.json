@@ -1,0 +1,7 @@
+{
+  "ref": "main",
+  "inputs": {
+    "service_name": "api-pagos-auth",
+    "environment": "PRO"
+  }
+}

@@ -1,0 +1,38 @@
+name: ZEUS Platform Configuration
+
+# Paso 2 y 3: ZEUS dispara este workflow enviando los datos del formulario
+on:
+  workflow_dispatch:
+    inputs:
+      service_name:
+        description: 'Nombre del servicio o aplicación'
+        required: true
+        type: string
+      environment:
+        description: 'Entorno de destino (DEV, PRE, PRO)'
+        required: true
+        type: choice
+        options:
+          - DEV
+          - PRE
+          - PRO
+
+jobs:
+  deploy-platform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Simular Workflow CDC (Validación y Control)
+        run: |
+          echo "Procesando datos recibidos desde ZEUS..."
+          echo "Servicio: ${{ inputs.service_name }}"
+          echo "Entorno: ${{ inputs.environment }}"
+          # Aquí irían las validaciones de negocio o control de cambios (CDC)
+
+      - name: Configuración de plataforma
+        run: |
+          echo "Aplicando configuración en la plataforma para ${{ inputs.service_name }} en ${{ inputs.environment }}..."
+          # Aquí se ejecutarían los comandos reales (Terraform, Ansible, scripts de despliegue, etc.)
+          echo "¡Plataforma configurada con éxito!"

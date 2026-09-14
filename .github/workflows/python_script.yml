@@ -1,0 +1,31 @@
+name: Python Job
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ejecutar:
+    runs-on: ubuntu-latest
+
+    container:
+      image: python:3.12-slim
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Comprobar entorno
+        run: |
+          cat /etc/os-release
+          python --version
+          pip --version
+
+      - name: Instalar dependencias
+        run: |
+          pip install requests
+
+      - name: Ejecutar script
+        env:
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+        run: |
+          python script.py

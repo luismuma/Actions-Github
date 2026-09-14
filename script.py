@@ -1,33 +1,24 @@
 import os
 import requests
 
-def main():
-    # Leer el token desde la variable de entorno
-    api_token = os.getenv("API_TOKEN")
-    if not api_token:
-        raise ValueError("API_TOKEN no está definido en el entorno")
+api_token = os.getenv("API_TOKEN")
 
-    # Endpoint de ejemplo
-    url = "https://api.example.com/data"
+if not api_token:
+    raise ValueError("API_TOKEN no está definido")
 
-    # Cabeceras con autenticación
-    headers = {
+response = requests.get(
+    "https://api.github.com/user",
+    headers={
         "Authorization": f"Bearer {api_token}",
-        "Accept": "application/json"
+        "Accept": "application/vnd.github+json"
     }
+)
 
-    print("Llamando a la API...")
+print(response.status_code)
 
-    try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        data = response.json()
-
-        print("Respuesta recibida:")
-        print(data)
-
-    except requests.exceptions.RequestException as e:
-        print(f"Error al llamar a la API: {e}")
-
-if __name__ == "__main__":
-    main()
+if response.ok:
+    user = response.json()
+    print(f"Token válido. Usuario: {user['login']}")
+else:
+    print("Token inválido o sin autorización")
+    print(response.text)

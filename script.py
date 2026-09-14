@@ -3,7 +3,7 @@ import requests
 
 def main():
     # Leer el token desde la variable de entorno
-    api_token = os.getenv("Token-Zeus-API")
+    api_token = os.getenv("API_TOKEN")
     if not api_token:
         raise ValueError("API_TOKEN no está definido en el entorno")
 

@@ -26,6 +26,6 @@ jobs:
 
       - name: Ejecutar script
         env:
-          API_TOKEN: ${{ secrets.Token-Zeus-API }}
+          API_TOKEN: ${{ secrets.TokenZeusAPI }}
         run: |
           python script.py
